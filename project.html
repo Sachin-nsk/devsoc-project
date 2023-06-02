@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VulnScan A Vulnerable Message Detector</title>
+   
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        body{background-image: url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw0NDQ0NDQ0NDQ0IBw0HBw0NDQ8IDQcNFREWFhURExMYHSggGBoxGxMVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDQ0NDg0PDysZFRkrNy0rNysrKzcrNy03KysrLSs3LS0rNystKysrKysrKystLSstKysrKysrKysrKysrK//AABEIALUBFwMBIgACEQEDEQH/xAAZAAEBAQEBAQAAAAAAAAAAAAAAAQIDBwT/xAAWEAEBAQAAAAAAAAAAAAAAAAAAEQH/xAAYAQEBAQEBAAAAAAAAAAAAAAAAAQIDBP/EABURAQEAAAAAAAAAAAAAAAAAAAAR/9oADAMBAAIRAxEAPwD1cQed6VEUBUAURUBUAaEKCiUBoQQWiAKIINCAKJQFAQAAAAAAAEABRwAdQWogNFQQWqzVBaItAVmqCiLUFolAaGVBRKAoCCiAKIqBSiApUAUqAKVAFqsqDhSsjqNFZoDQlAVUqUGqJRBSoEGqVlUGqVnCg0JSgolUFpUAaoyINUrIDVVhc0GhmrQUSlSCiUpBRmqQfOVKV2FVlagoiUGkRQVayA1SoJBqlZoQaoyUGhKUGhKILVrIDVKgQWqyEGhmlQaGaUGlZpQUSlBRKA4IlK6jQzSg0M0oNFZqkFWs0pBqolKkGqVmlINVazSkGhlaQaGaVINUrNWkGqVmlINVawqQapWQg0M0pBoZq0FVmlQaRM1SDgCuyIBgAoCai6hFUBIIoEAoEQqoEVRFAq1BIKIEFECCrWQg1SslSK1VrCkRoZKQaKzSkGqM0SDIDsyAEFEUhUFQigBAAIACQBQggoQRQIABAAiQACAAkEUQAqoKqGAAIQUB0jAAsAAFExSCBAigCQACAqBBaIEFAAAAAFKUECgEBFCAmqhAASAihFNSpStsKrNKDVKzSg0VmlUaoxVoNFZpQaGaVBoZpQaVmlBVZpRWhKUKolKFUKUKBUIioCRRRFgqAkUAIVz3UqUrbDVGaA1RmlBoqVKDRWaUGqVmgNUrNKQbGKUg2MVaQaKzSkK1VrFKQbpWaIrVEpQaKyEGqtZqUG6M0oKJSgolVBxSpUbRqlZKsRqlZpUitFZosGqiFBSpQFpUAWrWQGqVkBqrWAg3SsiQaq1haDVWsUoN0rFWitVa50qDdWsUojdKxVzRWqM0ByFGmUFATUoKFKoBSgKJVBClBFVFAAAAAKUAKAAVQAAEpVAAEVRAFAB//9k=");
+        background-repeat: no-repeat;
+        background-size: cover;
+            
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>VulnScan:A Vulnerable Message Detector</h1>
+        
+        <form id="messageForm">
+            <label for="message">Enter your message:</label>
+            <input type="text" id="message" required>
+            <button type="submit">Detect</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // Function to detect vulnerable messages
+        function detectVulnerableMessage(event) {
+            event.preventDefault();
+            var messageInput = document.getElementById('message');
+            var message = messageInput.value.toLowerCase();
+            var vulnerableWords = ['hack', 'exploit', 'virus', 'shoot','phishing', 'malware','weak','exposed','fuck','bullshit','weak', 'exposed', 'susceptible', 'naked', 'unguarded', 'unprotected', 'wide open', 'assassinate', 'drown', 'execute', 'murder', 'poison', 'slaughter', 'eradicate', 'hang', 'snuff', 'zap', 'polish off', 'death', 'threat', 'blackmail', 'hazard', 'intimidation', 'risk', 'thunder', 'armed', 'gun', 'weaponry', 'arm', 'shield', 'munitions', 'ammunition', 'armament','defense','guard'];
+            var isVulnerable = false;
+
+            for (var i = 0; i < vulnerableWords.length; i++) {
+                if (message.includes(vulnerableWords[i])) {
+                    isVulnerable = true;
+                    break;
+                }
+            }
+
+            var resultElement = document.getElementById('result');
+            if (isVulnerable) {
+                resultElement.innerText = 'Warning: The message contains vulnerable content.';
+                resultElement.style.color = 'red';
+            } else {
+                resultElement.innerText = 'The message is safe.';
+                resultElement.style.color = 'green';
+            }
+        }
+
+        var form = document.getElementById('messageForm');
+        form.addEventListener('submit', detectVulnerableMessage);
+    </script>
+</body>
+</html>
